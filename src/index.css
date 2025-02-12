@@ -1,0 +1,38 @@
+/* :root {
+  25rem;  400px
+  40rem;  640px
+  48rem;  768px
+  64rem;  1024px
+  80rem;  1280px
+  96rem;  1536px
+} */
+
+/* Configuração padrão */
+body {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+/* Tablet */
+@media (min-width: 48rem) {
+  body {
+    max-width: 40rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 64rem) {
+  body {
+    max-width: 48rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 80rem) {
+  body {
+    max-width: 64rem;
+  }
+}

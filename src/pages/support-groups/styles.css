@@ -1,0 +1,92 @@
+/* Estilos padrão (Mobile First) */
+.container-support-group {
+  width: 100%;
+  max-width: 25rem;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.filters-support-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.filters-support-group select {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.group-list-support-group {
+  list-style: none;
+  padding: 0;
+}
+
+.group-item-support-group {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.group-item-support-group h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Tablet (mínimo de 48rem) */
+@media (min-width: 48rem) {
+  .container-support-group {
+    max-width: 40rem;
+  }
+
+  .filters-support-group {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .filters-support-group select {
+    width: 48%;
+  }
+
+  .group-item-support-group {
+    padding: 15px;
+  }
+}
+
+/* Desktop (mínimo de 64rem) */
+@media (min-width: 64rem) {
+  .container-support-group {
+    max-width: 48rem;
+  }
+
+  .filters-support-group select {
+    width: 50%;
+  }
+
+  .group-list-support-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+/* Desktop (mínimo de 80rem) */
+@media (min-width: 80rem) {
+  .container-support-group {
+    max-width: 64rem;
+  }
+
+  .group-list-support-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+}
