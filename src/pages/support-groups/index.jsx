@@ -2,28 +2,54 @@ import { useState } from "react";
 import "./styles.css"; // Importando o CSS
 
 const mockGroups = [
-  { id: 1, name: "Apoio à Ansiedade", category: "Ansiedade", location: "Online" },
-  { id: 2, name: "Superando a Depressão", category: "Depressão", location: "São Paulo" },
-  { id: 3, name: "Grupo de Apoio LGBTQ+", category: "Inclusão", location: "Online" },
-  { id: 4, name: "Controle do Estresse", category: "Estresse", location: "Rio de Janeiro" },
-  { id: 5, name: "Resiliência Pós-Trauma", category: "Trauma", location: "Online" },
+  {
+    id: 1,
+    name: "Apoio à Ansiedade",
+    category: "Ansiedade",
+    location: "Online",
+  },
+  {
+    id: 2,
+    name: "Superando a Depressão",
+    category: "Depressão",
+    location: "São Paulo",
+  },
+  {
+    id: 3,
+    name: "Grupo de Apoio LGBTQ+",
+    category: "Inclusão",
+    location: "Online",
+  },
+  {
+    id: 4,
+    name: "Controle do Estresse",
+    category: "Estresse",
+    location: "Rio de Janeiro",
+  },
+  {
+    id: 5,
+    name: "Resiliência Pós-Trauma",
+    category: "Trauma",
+    location: "Online",
+  },
 ];
 
 export default function SupportGroups() {
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
 
-  const filteredGroups = mockGroups.filter(group =>
-    (category ? group.category === category : true) &&
-    (location ? group.location === location : true)
+  const filteredGroups = mockGroups.filter(
+    (group) =>
+      (category ? group.category === category : true) &&
+      (location ? group.location === location : true)
   );
 
   return (
-    <div className="container">
+    <div className="container-support-group">
       <h2>Grupos de Apoio</h2>
 
       {/* Filtros */}
-      <div className="filters">
+      <div className="filters-support-group">
         <select onChange={(e) => setCategory(e.target.value)} value={category}>
           <option value="">Todas as Categorias</option>
           <option value="Ansiedade">Ansiedade</option>
@@ -42,12 +68,14 @@ export default function SupportGroups() {
       </div>
 
       {/* Listagem dos grupos */}
-      <ul className="group-list">
+      <ul className="group-list-support-group">
         {filteredGroups.length > 0 ? (
-          filteredGroups.map(group => (
-            <li key={group.id} className="group-item">
+          filteredGroups.map((group) => (
+            <li key={group.id} className="group-item-support-group">
               <h3>{group.name}</h3>
-              <p>{group.category} - {group.location}</p>
+              <p>
+                {group.category} - {group.location}
+              </p>
             </li>
           ))
         ) : (
