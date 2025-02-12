@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import "./styles.css"; // Importando o CSS
+import "./styles.css"; // Importando o CSS
 
 const mockGroups = [
   { id: 1, name: "Apoio à Ansiedade", category: "Ansiedade", location: "Online" },
