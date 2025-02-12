@@ -20,18 +20,18 @@ const Testimonials = () => {
   ]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [newDepoimento, setNewDepoimento] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false); // Novo estado para controlar o envio
+  const [isSubmitted, setIsSubmitted] = useState(false); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitted(true); // Marca como enviado ao tentar submeter
+    setIsSubmitted(true);
     if (depoimento.trim()) {
       setListaDepoimentos([
         { text: depoimento, isMocked: false },
         ...listaDepoimentos,
       ]);
       setDepoimento("");
-      setIsSubmitted(false); // Resetar após sucesso no envio
+      setIsSubmitted(false); 
     }
   };
 
@@ -52,7 +52,7 @@ const Testimonials = () => {
       const updatedList = [...listaDepoimentos];
       updatedList[index].text = newDepoimento;
       setListaDepoimentos(updatedList);
-      setEditingIndex(null); // Finaliza a edição
+      setEditingIndex(null); 
       setNewDepoimento("");
     }
   };
