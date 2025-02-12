@@ -1,9 +1,13 @@
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import "./app.css";
+import Testimonials  from "./pages/AnonymousTestimonialsArea"; 
 
 function App() {
   return (
-    <h1>hi!</h1>
-  )
+    <Routes>
+      <Route path="/anonymousTestimonial" element={<Testimonials />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
