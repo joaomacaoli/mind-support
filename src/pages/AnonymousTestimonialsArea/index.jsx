@@ -20,18 +20,18 @@ const Testimonials = () => {
   ]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [newDepoimento, setNewDepoimento] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false); // Novo estado para controlar o envio
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitted(true); // Marca como enviado ao tentar submeter
+    setIsSubmitted(true);
     if (depoimento.trim()) {
       setListaDepoimentos([
         { text: depoimento, isMocked: false },
         ...listaDepoimentos,
       ]);
       setDepoimento("");
-      setIsSubmitted(false); // Resetar após sucesso no envio
+      setIsSubmitted(false);
     }
   };
 
@@ -52,95 +52,101 @@ const Testimonials = () => {
       const updatedList = [...listaDepoimentos];
       updatedList[index].text = newDepoimento;
       setListaDepoimentos(updatedList);
-      setEditingIndex(null); // Finaliza a edição
+      setEditingIndex(null); 
       setNewDepoimento("");
     }
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <h2>Área de Depoimentos Anônimos</h2>
-      </div>
-
-      <div className="container-form">
-        <form onSubmit={handleSubmit} className="testimonials-form">
-          <input
-            type="text"
-            value={depoimento}
-            onChange={(e) => setDepoimento(e.target.value)}
-            placeholder="Escreva seu depoimento aqui..."
-            className={`testimonials-input ${
-              isSubmitted && depoimento.trim() === "" ? "invalid" : ""
-            }`}
-          />
-          <p>
-            Ex.: &quot;Melhor experiência que já tive, mudou minha rotina!&quot;
-          </p>
-          <br />
-          <button type="submit" className="testimonials-btn">
-            Enviar Depoimento
-          </button>
-        </form>
-      </div>
-
-      <div className="testimonials-show">
-        <div className="testimonials-text">
-          <h2>Depoimentos</h2>
-          <p>Veja o que outras pessoas estão falando sobre a plataforma:</p>
+    <div className="all-container" id="all-container">
+      <div className="testimonials-container">
+        <div className="header-testimonials">
+          <h2>Área de Depoimentos Anônimos</h2>
         </div>
 
-        <div className="testimonials-list">
-          {listaDepoimentos.length > 0 ? (
-            <ul className="testimonials-ul">
-              {listaDepoimentos.map((item, index) => (
-                <li key={index} className="testimonials-li">
-                  <div className="testimonials-header">
-                    <CircleUserRound size={24} />
-                    <div className="testimonials-name">Usuário Anônimo</div>
-                    {!item.isMocked && (
-                      <>
-                        <Edit
-                          size={20}
-                          className="edit-icon"
-                          onClick={() => handleEdit(index)}
-                        />
-                        <Trash
-                          size={20}
-                          className="trash-icon"
-                          onClick={() => handleDelete(index)}
-                        />
-                      </>
-                    )}
-                  </div>
-                  {editingIndex === index ? (
-                    <div className="edit-input">
-                      <input
-                        type="text"
-                        value={newDepoimento}
-                        onChange={(e) => setNewDepoimento(e.target.value)}
-                        className={`testimonials-input-edit ${
-                          newDepoimento.trim() === "" ? "invalid" : ""
-                        }`}
-                        placeholder="Escreva seu depoimento aqui..."
-                      />
-                      <button
-                        type="button"
-                        className="save-btn"
-                        onClick={() => handleSaveEdit(index)}
-                      >
-                        Salvar
-                      </button>
+        <div className="container-form-testimonials">
+          <form onSubmit={handleSubmit} className="testimonials-form">
+            <input
+              type="text"
+              value={depoimento}
+              onChange={(e) => setDepoimento(e.target.value)}
+              placeholder="Escreva seu depoimento aqui..."
+              className={`testimonials-input ${
+                isSubmitted && depoimento.trim() === "" ? "invalid" : ""
+              }`}
+            />
+            <p className="testimonials-instructions">
+              Ex.: &quot;Melhor experiência que já tive, mudou minha
+              rotina!&quot;
+            </p>
+            <br />
+            <button type="submit" className="testimonials-btn">
+              Enviar Depoimento
+            </button>
+          </form>
+        </div>
+
+        <div className="testimonials-show">
+          <div className="testimonials-text">
+            <h2 className="testimonials-title">Depoimentos</h2>
+            <p className="testimonials-description">
+              Veja o que outras pessoas estão falando sobre a plataforma:
+            </p>
+          </div>
+
+          <div className="testimonials-list">
+            {listaDepoimentos.length > 0 ? (
+                
+              <ul className="testimonials-ul">
+                {listaDepoimentos.map((item, index) => (
+                  <li key={index} className="testimonials-li">
+                    <div className="testimonials-header">
+                      <CircleUserRound size={24} />
+                      <div className="testimonials-name">Usuário Anônimo</div>
+                      {!item.isMocked && (
+                        <>
+                          <Edit
+                            size={20}
+                            className="edit-icon"
+                            onClick={() => handleEdit(index)}
+                          />
+                          <Trash
+                            size={20}
+                            className="trash-icon"
+                            onClick={() => handleDelete(index)}
+                          />
+                        </>
+                      )}
                     </div>
-                  ) : (
-                    <p>{item.text}</p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Não há depoimentos para exibir ainda.</p>
-          )}
+                    {editingIndex === index ? (
+                      <div className="edit-input">
+                        <input
+                          type="text"
+                          value={newDepoimento}
+                          onChange={(e) => setNewDepoimento(e.target.value)}
+                          className={`testimonials-input-edit ${
+                            newDepoimento.trim() === "" ? "invalid" : ""
+                          }`}
+                          placeholder="Escreva seu depoimento aqui..."
+                        />
+                        <button
+                          type="button"
+                          className="save-btn"
+                          onClick={() => handleSaveEdit(index)}
+                        >
+                          Salvar
+                        </button>
+                      </div>
+                    ) : (
+                      <p>{item.text}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>Não há depoimentos para exibir ainda.</p>
+            )}
+          </div>
         </div>
       </div>
     </div>
