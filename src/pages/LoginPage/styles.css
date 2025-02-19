@@ -1,0 +1,179 @@
+:root {
+  --primary-color: #297549;
+  --secondary-color: #3c5d7e;
+  --text-color: #2c3e50;
+  --box-shadow: 0px 14px 20px rgba(0, 0, 0, 0.322);
+  --color-error: #e74c3c;
+  --border-color: #bdc3c7;
+  --transition-speed: 0.1s;
+}
+
+.title-login {
+  text-align: center;
+}
+
+.login-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-container {
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  min-height: 500px;
+  transition: transform var(--transition-speed) ease-in-out;
+  box-sizing: border-box;
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.label-login {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.input-type {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color var(--transition-speed) ease-in-out;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+}
+
+.input-type:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #ffffff;
+}
+
+.input-type.error {
+  border-color: var(--color-error);
+}
+
+.container-esqueceu-senha {
+  text-align: right;
+}
+
+.esqueceu-senha-text {
+  font-size: 14px;
+  color: black;
+  cursor: pointer;
+  transition: opacity var(--transition-speed);
+}
+
+.esqueceu-senha-text:hover {
+  opacity: 0.7;
+}
+
+.link-senha {
+  text-decoration: none;
+}
+
+.container-button {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.button-login,
+.button-cadastro {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity var(--transition-speed);
+  border: none;
+}
+
+.button-login {
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.button-cadastro {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.button-login:hover,
+.button-cadastro:hover {
+  opacity: 0.8;
+}
+
+.error-text {
+  color: var(--color-error);
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+@media (max-width: 1024px) {
+  .login-container {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 30px;
+    min-height: 550px;
+  }
+
+  .input-type {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .button-login,
+  .button-cadastro {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 20px;
+    min-height: 500px;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .label-login {
+    font-size: 14px;
+  }
+
+  .esqueceu-senha-text {
+    font-size: 12px;
+  }
+
+  .input-type {
+    font-size: 14px;
+  }
+
+  .button-login,
+  .button-cadastro {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
