@@ -10,7 +10,7 @@ export default function Topbar() {
       <div className="container-top-bar-menu">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/supportgroup">Suporte</NavLink>
-        <NavLink to="/anonymousTestimonial">Depoimentos</NavLink>
+        <NavLink to="/testimonials">Depoimentos</NavLink>
       </div>
     </nav>
   );

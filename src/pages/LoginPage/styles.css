@@ -30,6 +30,7 @@
   min-height: 500px;
   transition: transform var(--transition-speed) ease-in-out;
   box-sizing: border-box;
+
 }
 
 .form-login {
