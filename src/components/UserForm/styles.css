@@ -1,0 +1,273 @@
+:root {
+  --max-width: 43.75rem;
+  --padding: 1.875rem;
+  --border-radius: 0.625rem;
+  --box-shadow: 0rem 0rem 0.25rem rgba(0, 0, 0, 0.4);
+  --gap: 1.25rem;
+  --font-size-base: 1rem;
+  --font-size-small: 0.75rem;
+  --color-bg: #f8f7f2;
+  --color-bg-alt:  #287454;
+  --color-bg-hover: #5d8868;  
+  --color-primary:  #287454 ;
+  --color-primary-hover: #5a6d97;
+  --color-accent: #287454;
+  --color-error: #ff0000;
+  --border-radius-small: 0.25rem;   
+  --padding-small: 0.375rem;
+  --padding-medium: 0.625rem;
+  --padding-large: 1.25rem;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-container .profile-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.photo-container .profile-icon {
+  width: 100px;
+  height: 100px;
+  color: var(--color-primary);
+}
+
+.file-input {
+  display: none;
+ 
+}
+
+.file-label {
+  font-size: var(--font-size-base);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  cursor: pointer;
+}
+
+.file-label span {
+  font-size: var(--font-size-base);
+  padding: var(--padding-small) var(--padding-large);
+  border-radius: var(--border-radius-small);
+  text-align: center;
+  display: inline-block;
+  background-color: var(--color-bg-alt);
+  transition: background-color 0.3s ease;
+  color: #ffffff;
+}
+
+.file-label span:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+
+.input-group .input-label {
+  color: #000000;
+}
+
+.input-group .input-label small {
+  color: var(--color-error);
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border-radius: var(--border-radius-small);
+  border: 1px solid var(--color-bg-alt);
+ 
+}
+
+.input-field.error {
+  border-color: #e74c3c;
+}
+.error-message {
+  position: absolute;
+  bottom: -1.25rem;
+  left: 0;
+  color: #e74c3c;
+  font-size: 0.875rem;
+  margin-top: 0.25rem
+}
+.toggle-button {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  right: 0.625rem;
+  top: 0.938rem;
+}
+
+.input-row {
+  gap: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons_container {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.submit-button {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  padding: var(--padding-medium) var(--padding-large);
+  border: none;
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  transform: scale(1.01);
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ddd;
+  display: inline-block;
+  line-height: 30px;
+  margin-bottom: 0.5rem;
+}
+
+.step.active .step-number {
+  background: #297549;
+  color: white;
+}
+.role-specific-fields .input-group {
+  margin-bottom: 2rem;
+}
+.role-selection {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding: 1rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: border-color 0.3s ease;
+}
+.role-selection.error {
+  border-color: #e74c3c; 
+}
+
+.role-card {
+  flex: 1;
+  padding: 1.5rem;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background-color: #f8f7f2;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.role-card.active {
+  border-color: #297549;
+  background-color: #e8f5e9;
+}
+
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.button {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.button.primary, .button.secondary {
+  background: #297549;
+  color: white;
+}
+
+.button.submit {
+  background-color: #297549;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  opacity: 0.9; 
+}
+
+
+
+
+
+@media (max-width: 428px) {
+  .photo-container .file-label span {
+    display: none;
+  }
+
+  .photo-container .profile-icon {
+    width: 50px;
+    height: 50px;
+    color: var(--color-primary);
+  }
+
+  .input-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
+}
