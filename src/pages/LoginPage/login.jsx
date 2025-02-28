@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
+import { isValidEmail } from "../../utils/masks";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,10 +11,6 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const isValidEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
 
   const validateInputs = () => {
     const newErrors = { email: "", password: "" };
@@ -89,6 +86,7 @@ const Login = () => {
             <button type="submit" className="button-login" disabled={loading}>
               {loading ? "Entrando..." : "Entrar"}
             </button>
+            <Link to={"/register"}>
             <button
               type="button"
               className="button-cadastro"
@@ -96,6 +94,8 @@ const Login = () => {
             >
               {loading ? "Redirecionando..." : "Cadastrar"}
             </button>
+            </Link>
+           
           </div>
         </form>
       </div>

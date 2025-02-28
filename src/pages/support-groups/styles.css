@@ -1,27 +1,45 @@
-/* Estilos padrão (Mobile First) */
 .container-support-group {
   width: 100%;
   max-width: 25rem;
   margin: 0 auto;
-  padding: 10px;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 1.5rem;
   text-align: center;
+  color: #297549; 
+  margin-bottom: 1.5rem;
 }
 
 .filters-support-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .filters-support-group select {
-  padding: 8px;
-  font-size: 16px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filters-support-group select:hover {
+  border-color: #297549;
+}
+
+.filters-support-group select:focus {
+  outline: none;
+  border-color: #297549;
+  box-shadow: 0 0 0 2px rgba(41, 117, 73, 0.2); 
 }
 
 .group-list-support-group {
@@ -30,18 +48,38 @@ h2 {
 }
 
 .group-item-support-group {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.group-item-support-group:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .group-item-support-group h3 {
-  font-size: 18px;
+  font-size: 1.25rem;
   margin: 0;
+  color: #297549; 
 }
 
-/* Tablet (mínimo de 48rem) */
+.group-item-support-group p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0.5rem 0 0;
+}
+
+.group-list-support-group > p {
+  text-align: center;
+  color: #777;
+  font-size: 1rem;
+}
+
+
 @media (min-width: 48rem) {
   .container-support-group {
     max-width: 40rem;
@@ -57,11 +95,10 @@ h2 {
   }
 
   .group-item-support-group {
-    padding: 15px;
+    padding: 1.25rem;
   }
 }
 
-/* Desktop (mínimo de 64rem) */
 @media (min-width: 64rem) {
   .container-support-group {
     max-width: 48rem;
@@ -74,11 +111,10 @@ h2 {
   .group-list-support-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 1.5rem;
   }
 }
 
-/* Desktop (mínimo de 80rem) */
 @media (min-width: 80rem) {
   .container-support-group {
     max-width: 64rem;
@@ -87,6 +123,6 @@ h2 {
   .group-list-support-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 1.5rem;
   }
 }

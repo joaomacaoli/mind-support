@@ -1,0 +1,228 @@
+.main-landing-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 5%;
+  box-sizing: border-box;
+}
+
+/* Seção de Apresentação */
+.presentation-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6rem 0 4rem;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+.presentation-text {
+  flex: 1;
+  max-width: 600px;
+}
+
+.presentation-text h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #297549;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.presentation-text h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+  color: #333;
+}
+
+.presentation-text h4 {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  color: #555;
+}
+
+.green-highlighted-font {
+  color: #297549;
+  font-weight: 600;
+}
+
+.presentation-logo img {
+  max-width: 100%;
+  height: auto;
+  width: 400px;
+  transition: transform 0.3s ease;
+}
+
+.presentation-logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Seção de Objetivos */
+.objetivos {
+  padding: 4rem 0;
+  background-color: white;
+  position: relative;
+}
+
+.objetivos h3 {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: #297549;
+  margin-bottom: 3rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+  width: calc(50% - 1rem);
+  border: 2px solid #297549;
+  box-sizing: border-box;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+.titulo-obj {
+  font-weight: 700;
+  color: #297549;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.card p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.about-and-help-section {
+  padding: 4rem 0;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.left-about-and-help {
+  height: auto;
+  position: relative;
+}
+
+.left-about-and-help img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.left-about-and-help img:hover {
+  transform: scale(1.02);
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background-color: #297549;
+  color: white;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  margin-top: 2rem;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background-color: #1f5a3a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.right-help-text {
+  flex: 1;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.right-help-text p {
+  margin-bottom: 1.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .presentation-section {
+      flex-direction: column;
+      text-align: center;
+      padding-top: 6rem;
+  }
+
+  .presentation-logo img {
+      width: 300px;
+  }
+
+  .about-and-help-section {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .card {
+      width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .presentation-text h1 {
+      font-size: 2.5rem;
+  }
+
+  .card {
+      width: 100%;
+  }
+
+  .btn {
+      width: 100%;
+      padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .presentation-logo img {
+      width: 250px;
+  }
+
+  .card {
+      padding: 1.5rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
