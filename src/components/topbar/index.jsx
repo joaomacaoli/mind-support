@@ -24,10 +24,10 @@ export default function Topbar() {
         </ul>
 
         <div className="btn-group">
-          <Link to={"/login"}>
+          <Link to={"/login"} className="nav-link-top">
             <button className="btn-login"> Login </button>
           </Link>
-          <Link to={"/register"}>
+          <Link to={"/register"}  className="nav-link-top" >
             <button className="btn-sign-up"> Sing Up</button>
           </Link>
         </div>

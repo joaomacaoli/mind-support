@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { isValidEmail } from "../../utils/masks";
 import "./styles.css";
-import { ChevronLeft, ChevronRight, User } from "lucide-react";
+import { ChevronLeft, ChevronRight,  User } from "lucide-react";
 
 export function UserForm({ defaultValues, onSubmit }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [userType, setUserType] = useState("");
   const [errors, setErrors] = useState({});
   const [photoPreview, setPhotoPreview] = useState(null);
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
     fullName: "",
@@ -18,6 +20,8 @@ export function UserForm({ defaultValues, onSubmit }) {
     roleSpecific: {},
     ...defaultValues,
   });
+
+
 
   const steps = {
     patient: [{ title: "Informações Básicas" }, { title: "Senha" }],
@@ -35,6 +39,9 @@ export function UserForm({ defaultValues, onSubmit }) {
     "Pediatria",
     "Psiquiatria",
   ];
+
+
+
 
   const validateField = (name, value) => {
     let error = "";
@@ -113,6 +120,11 @@ export function UserForm({ defaultValues, onSubmit }) {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
+  const [touched, setTouched] = useState({
+    password: false,
+    confirmPassword: false,
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -357,59 +369,59 @@ export function UserForm({ defaultValues, onSubmit }) {
           </div>
         );
 
-      case "Senha":
-        return (
-          <div className="password-fields">
-            <div className="input-group">
-              <label htmlFor="password" className="input-label">
-                Senha <small>*</small>
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formValues.password}
-                onChange={handleInputChange}
-                onBlur={(e) => {
-                  const error = validateField(e.target.name, e.target.value);
-                  setErrors((prev) => ({ ...prev, password: error }));
-                }}
-                className={`input-field ${errors.password ? "error" : ""}`}
-              />
-              {errors.password && (
-                <small className="error-message">{errors.password}</small>
-              )}
+        case "Senha":
+          return (
+            <div className="password-fields">
+              <div className="input-group">
+                <label htmlFor="password" className="input-label">
+                  Senha <small>*</small>
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formValues.password}
+                  onChange={handleInputChange}
+                  onBlur={(e) => {
+                    setTouched((prev) => ({ ...prev, password: true }));
+                    const error = validateField(e.target.name, e.target.value);
+                    setErrors((prev) => ({ ...prev, password: error }));
+                  }}
+                  className={`input-field ${errors.password && touched.password ? "error" : ""}`}
+                />
+                {errors.password && touched.password && (
+                  <small className="error-message">{errors.password}</small>
+                )}
+              </div>
+        
+              <div className="input-group">
+                <label htmlFor="confirmPassword" className="input-label">
+                  Confirmar Senha <small>*</small>
+                </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formValues.confirmPassword}
+                  onChange={handleInputChange}
+                  onBlur={(e) => {
+                    setTouched((prev) => ({ ...prev, confirmPassword: true }));
+                    const error = validateField(e.target.name, e.target.value);
+                    setErrors((prev) => ({ ...prev, confirmPassword: error }));
+                  }}
+                  className={`input-field ${
+                    errors.confirmPassword && touched.confirmPassword ? "error" : ""
+                  }`}
+                />
+                {errors.confirmPassword && touched.confirmPassword && (
+                  <small className="error-message">{errors.confirmPassword}</small>
+                )}
+              </div>
             </div>
-
-            <div className="input-group">
-              <label htmlFor="confirmPassword" className="input-label">
-                Confirmar Senha <small>*</small>
-              </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formValues.confirmPassword}
-                onChange={handleInputChange}
-                onBlur={(e) => {
-                  const error = validateField(e.target.name, e.target.value);
-                  setErrors((prev) => ({ ...prev, confirmPassword: error }));
-                }}
-                className={`input-field ${
-                  errors.confirmPassword ? "error" : ""
-                }`}
-              />
-              {errors.confirmPassword && (
-                <small className="error-message">
-                  {errors.confirmPassword}
-                </small>
-              )}
-            </div>
-          </div>
-        );
-
-      default:
-        return null;
+          );
+        
+        default:
+          return null;
     }
   };
 
@@ -480,9 +492,12 @@ export function UserForm({ defaultValues, onSubmit }) {
               <ChevronRight />
             </button>
           ) : (
-            <button type="submit" className="button submit">
+           
+             <button type="submit" className="button submit" onClick={() => navigate("/login")}>
               {defaultValues ? "Atualizar" : "Cadastrar"}
             </button>
+          
+           
           )}
         </div>
       </form>

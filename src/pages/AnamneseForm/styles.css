@@ -4,7 +4,7 @@
     width: 100%;
     margin: 20px;
     padding: 20px;
-    background-color: #f8f7f2;
+
     border: 2px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -31,7 +31,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: #f8f7f2;
+    
     color: #287454;
     display: flex;
     align-items: center;

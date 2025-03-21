@@ -34,7 +34,7 @@ export function AnamneseForm({ onSubmit }) {
         if (!value.trim()) error = "Nome é obrigatório";
         break;
       case "idade":
-        if (!value.trim() || isNaN(value)) error = "Idade inválida";
+        if (!value.trim() || isNaN(value) || value <= 5 ) error = "Idade inválida";
         break;
       case "genero":
         if (!value.trim()) error = "Gênero é obrigatório";
