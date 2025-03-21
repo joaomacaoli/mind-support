@@ -83,9 +83,11 @@ const Login = () => {
           </div>
 
           <div className="container-button">
+            <Link to={"/anamneses"}>
             <button type="submit" className="button-login" disabled={loading}>
               {loading ? "Entrando..." : "Entrar"}
             </button>
+            </Link>
             <Link to={"/register"}>
             <button
               type="button"

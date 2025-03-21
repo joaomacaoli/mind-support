@@ -1,65 +1,39 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  isValidCPF,
-  isValidPhone,
-  isValidEmail,
-  isValidCep,
-  phoneMask,
-  cpfMask,
-  cepMask,
-} from "../../utils/masks";
+import { isValidEmail } from "../../utils/masks";
 import "./styles.css";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, User } from "lucide-react";
 
 export function UserForm({ defaultValues, onSubmit }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [userType, setUserType] = useState("");
   const [errors, setErrors] = useState({});
-  const [showOtherSpecialtyInput] = useState(false);
+  const [photoPreview, setPhotoPreview] = useState(null);
 
   const [formValues, setFormValues] = useState({
     fullName: "",
-    cpf: "",
-    phone: "",
     email: "",
-    cep: "",
     password: "",
     confirmPassword: "",
     roleSpecific: {},
     ...defaultValues,
   });
 
-  // Etapas do formulário
-  const steps = [
-    { title: "Tipo de Usuário" },
-    { title: "Informações Básicas" },
-    { title: "Informações Específicas" },
-    { title: "Senha" }, // Novo passo para a senha
-  ];
-
-  // Campos específicos por tipo de usuário
-  const roleFields = {
+  const steps = {
+    patient: [{ title: "Informações Básicas" }, { title: "Senha" }],
     professional: [
-      { name: "crm", label: "CRM/CRP", required: true },
-      { name: "specialty", label: "Especialidade", required: true },
-    ],
-    patient: [
-      { name: "medicalHistory", label: "Histórico Médico", required: false },
-      { name: "insurance", label: "Convênio Médico", required: false },
+      { title: "Informações Básicas" },
+      { title: "Informações Profissionais" },
+      { title: "Senha" },
     ],
   };
 
   const specialties = [
-
-
     "Endocrinologia",
-  
     "Neurologia",
     "Psicologia",
     "Pediatria",
     "Psiquiatria",
-
   ];
 
   const validateField = (name, value) => {
@@ -68,29 +42,28 @@ export function UserForm({ defaultValues, onSubmit }) {
       case "fullName":
         if (!value.trim()) error = "Nome completo é obrigatório";
         break;
-      case "cpf":
-        if (!isValidCPF(value)) error = "CPF inválido";
-        break;
-      case "phone":
-        if (!isValidPhone(value)) error = "Telefone inválido";
-        break;
       case "email":
         if (!isValidEmail(value)) error = "E-mail inválido";
         break;
-      case "cep":
-        if (!isValidCep(value)) error = "CEP inválido";
+      case "password":
+        if (value.length < 6)
+          error = "A senha deve ter pelo menos 6 caracteres";
         break;
-      case "crm":
-        if (!value.trim()) error = "CRM/CRP é obrigatório";
+      case "confirmPassword":
+        if (value !== formValues.password) error = "As senhas não coincidem";
         break;
       case "specialty":
         if (!value.trim()) error = "Especialidade é obrigatória";
         break;
-      case "password":
-        if (value.length < 6) error = "A senha deve ter pelo menos 6 caracteres";
+      case "location":
+        if (!value.trim()) error = "Localização é obrigatória";
         break;
-      case "confirmPassword":
-        if (value !== formValues.password) error = "As senhas não coincidem";
+      case "ageRange":
+        if (!value.trim()) error = "Faixa etária de atendimento é obrigatória";
+        break;
+      case "freeSessions":
+        if (isNaN(value))
+          error = "Quantidade de atendimentos gratuitos deve ser um número";
         break;
       default:
         break;
@@ -105,23 +78,31 @@ export function UserForm({ defaultValues, onSubmit }) {
       newErrors.userType = "Selecione um tipo de usuário";
     }
 
-    if (step === 1) {
-      const fieldsToValidate = ["fullName", "cpf", "phone", "email", "cep"];
+    if (step === 0 && userType) {
+      const fieldsToValidate = ["fullName", "email"];
       fieldsToValidate.forEach((field) => {
         const error = validateField(field, formValues[field]);
         if (error) newErrors[field] = error;
       });
     }
 
-    if (step === 2 && userType === "professional") {
-      const fieldsToValidate = ["crm", "specialty"];
+    if (step === 1 && userType === "professional") {
+      const fieldsToValidate = [
+        "specialty",
+        "location",
+        "ageRange",
+        "freeSessions",
+      ];
       fieldsToValidate.forEach((field) => {
         const error = validateField(field, formValues.roleSpecific[field]);
         if (error) newErrors[field] = error;
       });
     }
 
-    if (step === 3) {
+    if (
+      (step === 1 && userType === "patient") ||
+      (step === 2 && userType === "professional")
+    ) {
       const fieldsToValidate = ["password", "confirmPassword"];
       fieldsToValidate.forEach((field) => {
         const error = validateField(field, formValues[field]);
@@ -135,33 +116,16 @@ export function UserForm({ defaultValues, onSubmit }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    let maskedValue = value;
-
-    switch (name) {
-      case "phone":
-        maskedValue = phoneMask(value);
-        break;
-      case "cpf":
-        maskedValue = cpfMask(value);
-        break;
-      case "cep":
-        maskedValue = cepMask(value);
-        break;
-      default:
-        maskedValue = value;
-    }
-
     setFormValues((prev) => ({
       ...prev,
-      [name]: maskedValue,
+      [name]: value,
     }));
 
     if (errors[name]) {
-      const error = validateField(name, maskedValue);
+      const error = validateField(name, value);
       setErrors((prev) => ({ ...prev, [name]: error }));
     }
   };
-
 
   const handleRoleSpecificChange = (e) => {
     const { name, value } = e.target;
@@ -173,16 +137,33 @@ export function UserForm({ defaultValues, onSubmit }) {
       },
     }));
 
-
     if (errors[name]) {
       const error = validateField(name, value);
       setErrors((prev) => ({ ...prev, [name]: error }));
     }
   };
 
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result); 
+      };
+      reader.readAsDataURL(file); 
+      setFormValues((prev) => ({
+        ...prev,
+        roleSpecific: {
+          ...prev.roleSpecific,
+          photo: file,
+        },
+      }));
+    }
+  };
+
   const handleNextStep = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
+      setCurrentStep((prev) => Math.min(prev + 1, steps[userType].length - 1));
     }
   };
 
@@ -201,37 +182,42 @@ export function UserForm({ defaultValues, onSubmit }) {
   };
 
   const renderStepContent = () => {
-    switch (currentStep) {
-      case 0:
-        return (
-          <div className="role-selection">
-            <button
-              type="button"
-              className={`role-card ${userType === "patient" ? "active" : ""}`}
-              onClick={() => setUserType("patient")}
-            >
-              <h3>Paciente</h3>
-              <p>Cadastro para pacientes</p>
-            </button>
+    const currentSteps = steps[userType] || [];
+    const stepTitle = currentSteps[currentStep]?.title;
 
-            <button
-              type="button"
-              className={`role-card ${userType === "professional" ? "active" : ""}`}
-              onClick={() => setUserType("professional")}
-            >
-              <h3>Profissional</h3>
-              <p>Cadastro para médicos e terapeutas</p>
-            </button>
-
-            {errors.userType && (
-              <small className="error-message">{errors.userType}</small>
-            )}
-          </div>
-        );
-
-      case 1:
+    switch (stepTitle) {
+      case "Informações Básicas":
         return (
           <>
+            {userType === "professional" && (
+              <div className="input-group">
+              
+                <div id="photo-container">
+                  <label htmlFor="photo" className="file-label">
+                    {photoPreview ? (
+                      <img
+                        src={photoPreview}
+                        alt="Foto do profissional"
+                        className="photo-preview"
+                      />
+                    ) : (
+                      <div className="photo-placeholder">
+                        <User size={40} color="var(--color-primary)" />
+                      </div>
+                    )}
+                    <span>Selecionar Foto</span>
+                  </label>
+                  <input
+                    type="file"
+                    id="photo"
+                    name="photo"
+                    onChange={handlePhotoChange}
+                    className="file-input"
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+            )}
             <div className="input-group">
               <label htmlFor="fullName" className="input-label">
                 Nome completo <small>*</small>
@@ -253,160 +239,125 @@ export function UserForm({ defaultValues, onSubmit }) {
               )}
             </div>
 
-            <div className="input-row">
-              <div className="input-group">
-                <label htmlFor="cpf" className="input-label">
-                  CPF <small>*</small>
-                </label>
-                <input
-                  type="text"
-                  id="cpf"
-                  name="cpf"
-                  value={formValues.cpf}
-                  onChange={handleInputChange}
-                  onBlur={(e) => {
-                    const error = validateField(e.target.name, e.target.value);
-                    setErrors((prev) => ({ ...prev, cpf: error }));
-                  }}
-                  className={`input-field ${errors.cpf ? "error" : ""}`}
-                />
-                {errors.cpf && (
-                  <small className="error-message">{errors.cpf}</small>
-                )}
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="phone" className="input-label">
-                  Telefone <small>*</small>
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formValues.phone}
-                  onChange={handleInputChange}
-                  onBlur={(e) => {
-                    const error = validateField(e.target.name, e.target.value);
-                    setErrors((prev) => ({ ...prev, phone: error }));
-                  }}
-                  className={`input-field ${errors.phone ? "error" : ""}`}
-                />
-                {errors.phone && (
-                  <small className="error-message">{errors.phone}</small>
-                )}
-              </div>
-            </div>
-
-            <div className="input-row">
-              <div className="input-group">
-                <label htmlFor="email" className="input-label">
-                  E-mail <small>*</small>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formValues.email}
-                  onChange={handleInputChange}
-                  onBlur={(e) => {
-                    const error = validateField(e.target.name, e.target.value);
-                    setErrors((prev) => ({ ...prev, email: error }));
-                  }}
-                  className={`input-field ${errors.email ? "error" : ""}`}
-                />
-                {errors.email && (
-                  <small className="error-message">{errors.email}</small>
-                )}
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="cep" className="input-label">
-                  CEP <small>*</small>
-                </label>
-                <input
-                  type="text"
-                  id="cep"
-                  name="cep"
-                  value={formValues.cep}
-                  onChange={handleInputChange}
-                  onBlur={(e) => {
-                    const error = validateField(e.target.name, e.target.value);
-                    setErrors((prev) => ({ ...prev, cep: error }));
-                  }}
-                  className={`input-field ${errors.cep ? "error" : ""}`}
-                />
-                {errors.cep && (
-                  <small className="error-message">{errors.cep}</small>
-                )}
-              </div>
+            <div className="input-group">
+              <label htmlFor="email" className="input-label">
+                E-mail <small>*</small>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formValues.email}
+                onChange={handleInputChange}
+                onBlur={(e) => {
+                  const error = validateField(e.target.name, e.target.value);
+                  setErrors((prev) => ({ ...prev, email: error }));
+                }}
+                className={`input-field ${errors.email ? "error" : ""}`}
+              />
+              {errors.email && (
+                <small className="error-message">{errors.email}</small>
+              )}
             </div>
           </>
         );
 
-      case 2:
+      case "Informações Profissionais":
         return (
           <div className="role-specific-fields">
-            {roleFields[userType]?.map((field) => (
-              <div key={field.name} className="input-group">
-                <label htmlFor={field.name} className="input-label">
-                  {field.label}
-                  {field.required && <small> *</small>}
-                </label>
-                {field.name === "specialty" ? (
-                  <>
-                    <select
-                      id={field.name}
-                      name={field.name}
-                      value={formValues.roleSpecific[field.name] || ""}
-                      onChange={handleRoleSpecificChange}
-                      onBlur={(e) => {
-                        const error = validateField(e.target.name, e.target.value);
-                        setErrors((prev) => ({ ...prev, [field.name]: error }));
-                      }}
-                      className={`input-field ${errors[field.name] ? "error" : ""}`}
-                    >
-                      <option value="">Selecione uma especialidade</option>
-                      {specialties.map((specialty) => (
-                        <option key={specialty} value={specialty}>
-                          {specialty}
-                        </option>
-                      ))}
-                    </select>
-                    {showOtherSpecialtyInput && (
-                      <input
-                        type="text"
-                        id="otherSpecialty"
-                        name="otherSpecialty"
-                        value={formValues.roleSpecific.otherSpecialty || ""}
-                        onChange={handleRoleSpecificChange}
-                        className={`input-field ${errors.otherSpecialty ? "error" : ""}`}
-                        placeholder="Digite a especialidade"
-                      />
-                    )}
-                  </>
-                ) : (
-                  <input
-                    type="text"
-                    id={field.name}
-                    name={field.name}
-                    value={formValues.roleSpecific[field.name] || ""}
-                    onChange={handleRoleSpecificChange}
-                    onBlur={(e) => {
-                      const error = validateField(e.target.name, e.target.value);
-                      setErrors((prev) => ({ ...prev, [field.name]: error }));
-                    }}
-                    className={`input-field ${errors[field.name] ? "error" : ""}`}
-                  />
-                )}
-                {errors[field.name] && (
-                  <small className="error-message">{errors[field.name]}</small>
-                )}
-              </div>
-            ))}
+            <div className="input-group">
+              <label htmlFor="specialty" className="input-label">
+                Especialidade <small>*</small>
+              </label>
+              <select
+                id="specialty"
+                name="specialty"
+                value={formValues.roleSpecific.specialty || ""}
+                onChange={handleRoleSpecificChange}
+                onBlur={(e) => {
+                  const error = validateField(e.target.name, e.target.value);
+                  setErrors((prev) => ({ ...prev, specialty: error }));
+                }}
+                className={`input-field ${errors.specialty ? "error" : ""}`}
+              >
+                <option value="">Selecione uma especialidade</option>
+                {specialties.map((specialty) => (
+                  <option key={specialty} value={specialty}>
+                    {specialty}
+                  </option>
+                ))}
+              </select>
+              {errors.specialty && (
+                <small className="error-message">{errors.specialty}</small>
+              )}
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="location" className="input-label">
+                Localização <small>*</small>
+              </label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={formValues.roleSpecific.location || ""}
+                onChange={handleRoleSpecificChange}
+                onBlur={(e) => {
+                  const error = validateField(e.target.name, e.target.value);
+                  setErrors((prev) => ({ ...prev, location: error }));
+                }}
+                className={`input-field ${errors.location ? "error" : ""}`}
+              />
+              {errors.location && (
+                <small className="error-message">{errors.location}</small>
+              )}
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="ageRange" className="input-label">
+                Faixa etária de atendimento <small>*</small>
+              </label>
+              <input
+                type="text"
+                id="ageRange"
+                name="ageRange"
+                value={formValues.roleSpecific.ageRange || ""}
+                onChange={handleRoleSpecificChange}
+                onBlur={(e) => {
+                  const error = validateField(e.target.name, e.target.value);
+                  setErrors((prev) => ({ ...prev, ageRange: error }));
+                }}
+                className={`input-field ${errors.ageRange ? "error" : ""}`}
+              />
+              {errors.ageRange && (
+                <small className="error-message">{errors.ageRange}</small>
+              )}
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="freeSessions" className="input-label">
+                Quantidade de atendimentos gratuitos
+              </label>
+              <input
+                type="number"
+                id="freeSessions"
+                name="freeSessions"
+                value={formValues.roleSpecific.freeSessions || ""}
+                onChange={handleRoleSpecificChange}
+                onBlur={(e) => {
+                  const error = validateField(e.target.name, e.target.value);
+                  setErrors((prev) => ({ ...prev, freeSessions: error }));
+                }}
+                className={`input-field ${errors.freeSessions ? "error" : ""}`}
+              />
+              {errors.freeSessions && (
+                <small className="error-message">{errors.freeSessions}</small>
+              )}
+            </div>
           </div>
         );
 
-      case 3:
+      case "Senha":
         return (
           <div className="password-fields">
             <div className="input-group">
@@ -444,10 +395,14 @@ export function UserForm({ defaultValues, onSubmit }) {
                   const error = validateField(e.target.name, e.target.value);
                   setErrors((prev) => ({ ...prev, confirmPassword: error }));
                 }}
-                className={`input-field ${errors.confirmPassword ? "error" : ""}`}
+                className={`input-field ${
+                  errors.confirmPassword ? "error" : ""
+                }`}
               />
               {errors.confirmPassword && (
-                <small className="error-message">{errors.confirmPassword}</small>
+                <small className="error-message">
+                  {errors.confirmPassword}
+                </small>
               )}
             </div>
           </div>
@@ -461,7 +416,7 @@ export function UserForm({ defaultValues, onSubmit }) {
   return (
     <div className="form-container">
       <div className="step-indicator">
-        {steps.map((step, index) => (
+        {steps[userType]?.map((step, index) => (
           <div
             key={step.title}
             className={`step ${index <= currentStep ? "active" : ""}`}
@@ -473,7 +428,35 @@ export function UserForm({ defaultValues, onSubmit }) {
       </div>
 
       <form onSubmit={handleSubmit} className="form">
-        {renderStepContent()}
+        {!userType ? (
+          <div className="role-selection">
+            <button
+              type="button"
+              className={`role-card ${userType === "patient" ? "active" : ""}`}
+              onClick={() => setUserType("patient")}
+            >
+              <h3>Paciente</h3>
+              <p>Cadastro para pacientes</p>
+            </button>
+
+            <button
+              type="button"
+              className={`role-card ${
+                userType === "professional" ? "active" : ""
+              }`}
+              onClick={() => setUserType("professional")}
+            >
+              <h3>Profissional</h3>
+              <p>Cadastro para médicos e terapeutas</p>
+            </button>
+
+            {errors.userType && (
+              <small className="error-message">{errors.userType}</small>
+            )}
+          </div>
+        ) : (
+          renderStepContent()
+        )}
 
         <div className="form-actions">
           {currentStep > 0 && (
@@ -487,7 +470,7 @@ export function UserForm({ defaultValues, onSubmit }) {
             </button>
           )}
 
-          {currentStep < steps.length - 1 ? (
+          {currentStep < steps[userType]?.length - 1 ? (
             <button
               type="button"
               onClick={handleNextStep}
@@ -508,7 +491,6 @@ export function UserForm({ defaultValues, onSubmit }) {
 }
 
 UserForm.propTypes = {
-  isAdmin: PropTypes.bool.isRequired,
   defaultValues: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
 };

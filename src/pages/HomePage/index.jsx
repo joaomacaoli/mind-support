@@ -3,7 +3,6 @@ import Footer from "../../components/Footer";
 
 import headflower from "./assets/headflower.jpg";
 import twoWomen from "./assets/two-women-img.png";
-import greenBrain from "./assets/green-brain.png";
 
 const Home = () => {
   return (
@@ -30,7 +29,6 @@ const Home = () => {
           <h3> Confira nossos objetivos </h3>
           <div className="card-container">
             <div className="card obj1">
-              <img src={greenBrain} alt="Green Brain" />
               <p className="titulo-obj"> Promoção de autoconhecimento </p>
               <p>
                 {" "}
@@ -40,7 +38,6 @@ const Home = () => {
             </div>
 
             <div className="card obj2">
-              <img src={greenBrain} alt="Green Brain" />
               <p className="titulo-obj"> Acompanhamento gratuito </p>
               <p>
                 {" "}
@@ -51,7 +48,6 @@ const Home = () => {
             </div>
 
             <div className="card obj3">
-              <img src={greenBrain} alt="Green Brain" />
               <p className="titulo-obj"> Melhorar a qualidade de vida </p>
               <p>
                 {" "}
@@ -59,6 +55,16 @@ const Home = () => {
                 cada pessoa possa desenvolver habilidades para gerenciar o
                 estresse, melhorar o autocuidado e cultivar uma mentalidade
                 positiva.{" "}
+              </p>
+            </div>
+
+            <div className="card obj4">
+              <p className="titulo-obj"> Acompanhamento gratuito </p>
+              <p>
+                {" "}
+                Garantir acesso e apoio emocional de qualidade, com a ajuda de
+                psicólogos altamente qualificados, independentemente da sua
+                situação financeira.
               </p>
             </div>
           </div>
@@ -83,7 +89,6 @@ const Home = () => {
               você em cada passo dessa jornada, oferecendo um ambiente
               acolhedor, empático e profissional.
             </p>
-          
           </div>
         </section>
       </main>
@@ -91,7 +96,6 @@ const Home = () => {
       <footer>
         <Footer></Footer>
       </footer>
-     
     </>
   );
 };
