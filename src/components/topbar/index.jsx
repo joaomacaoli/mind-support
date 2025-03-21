@@ -7,7 +7,7 @@ export default function Topbar() {
     <nav className="container-nav">
       <div className="container-logo">
         <NavLink to="/">
-          <img src={brainLogo} alt=" Brain Logo" />
+          <img src={brainLogo} alt=" Brain Logo" className="imglogo"/>
         </NavLink>
       </div>
 
@@ -18,10 +18,10 @@ export default function Topbar() {
       </div>
 
       <div className="btn-group-login">
-        <NavLink to="/login" className="button login">
+        <NavLink to="/login" className="button-login">
           Login
         </NavLink>
-        <NavLink to="/generalRegistration" className="button sing-up">
+        <NavLink to="/registers" className="button-sing-up">
           Sing Up
         </NavLink>
       </div>
