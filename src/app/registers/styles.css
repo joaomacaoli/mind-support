@@ -1,0 +1,34 @@
+.register-admin-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+  
+  }
+  
+  .register-admin-content {
+    max-width: 1200px;
+    width: 100%;
+  
+    padding: 1.875rem;
+    border-radius: 0.625rem;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+   
+  }
+  
+  @media (max-width: 1023px) {
+    .register-admin-container {
+      padding: 4rem 1rem;
+    }
+    .register-admin-content {
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 428px) {
+    .register-admin-content {
+      padding: 1rem 0.5rem;
+    }
+  }
