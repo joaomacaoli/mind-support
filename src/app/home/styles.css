@@ -1,0 +1,156 @@
+
+.main-layout{
+  background-color: #f4f4f4;
+}
+
+/*PRIMEIRA SECTION*/
+.presentation-section{
+  display: flex;
+  flex-direction: row;
+  height: 80vh;
+  width: auto;
+  padding: 0px 90px;
+}
+
+.presentation-text{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  & h1{
+    color: #4caf4f;
+    font-size: -webkit-xxx-large;
+  }
+  & h3{
+    font-weight: normal;
+    font-size: x-large;
+  }
+  & h4{
+    font-weight: normal;
+    font-size: large;
+    text-align: center;
+  }
+  & .green-highlighted-font{
+    color: #3cb371;
+  }
+}
+
+.presentation-logo{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.presentation-logo img{
+  height: 80%;
+  width: auto;
+}
+
+
+
+/*SEGUNDA SECTION*/
+.objetivos h3{
+  text-align: center;
+  color: #3cb371;
+  padding-bottom: 20px;
+  font-size: x-large;
+}
+
+.card-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 0px 200px;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  height: 240px;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  gap: 10px;
+  border: 1px solid  #3cb371; 
+  border-radius: 8px;
+  padding: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  & img{
+    width: auto;
+    height: 40px;
+  }
+}
+
+.card:hover{
+  background-color: #3cb371;
+  color: white;
+}
+.card:hover img {
+  filter: brightness(0) invert(1); /*deixa a logo branca no hover*/
+}
+
+
+.titulo-obj{
+  font-weight: bold;
+}
+
+/*TERCEIRA SECTION*/
+.about-and-help-section{
+  display: flex;
+  flex-direction: row;
+  height: 80vh;
+  width: auto;
+  padding: 60px 0;  
+}
+
+.left-about-and-help{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  & img{
+    height: 80%;
+    width: auto;
+  }
+}
+
+.ask-for-help-now{
+  height: 60px;
+  width: 220px;
+  font-size: x-large;
+  border: none;
+  border-radius: 8px;
+  background-color: #3cb371;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease; 
+}
+
+.ask-for-help-now:hover{
+  border: 2px solid #3cb371;
+  background-color: #ffffff;
+  color: #3cb371;
+  box-shadow: 0 4px 12px #00000033;
+}
+
+.right-help-text{
+  width: 50%;
+  background-color: #3cb371;
+  color: #ffffff;
+  text-align: center;
+}
+.right-help-text p{
+  padding: 20px;
+  font-size: x-large;
+}
