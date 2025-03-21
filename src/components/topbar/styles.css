@@ -11,8 +11,69 @@
 .container-top-bar-menu {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 2rem;
+  font-size: larger;
+  font-weight: bold;
 }
+
+.container-top-bar-menu a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.container-top-bar-menu a:hover{
+  text-decoration: underline;
+  color: #3cb371;
+}
+
+.container-logo img{
+  width: auto;
+  height: 60px;
+}
+
+.btn-group-login{
+  display: flex;
+  align-items: center;
+  gap: 10px;  
+}
+
+.btn-group-login a{
+  text-decoration: none;
+}
+
+.button{
+  height: 40px;
+  width: 80px;
+  font-size: larger;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;     
+  align-items: center;
+}
+
+
+.login{
+  background-color: #ffffff;
+  color: #3cb371;
+}
+.login:hover{
+  border: 1px solid #3cb371;
+  box-shadow: 0 4px 12px #00000033;
+}
+.sing-up{
+  background-color: #3cb371;
+  color: #ffffff;
+}
+.sing-up:hover{
+  background-color: #ffffff;
+  color: #3cb371;
+  border: 1px solid #3cb371;
+  box-shadow: 0 4px 12px #00000033;
+}
+
+
 
 /* Tablet */
 @media (min-width: 48rem) {

@@ -1,0 +1,73 @@
+.container-form-doctor{
+    background-color: #f4f4f4;
+    width: 70%;
+    height: 90%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    color: #434443;
+    row-gap: 25px;
+}
+
+.container-form-doctor p{
+    font-size: x-large;
+    font-weight: bold;
+    margin: 0px;
+}
+
+.form-doctor{
+    display: flex;
+    width: 90%;
+}
+
+.left-column-section{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.right-column-section{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-field{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.form-field input, .form-field select{
+    border: 1px solid #4caf4f;
+    border-radius: 4px;
+    width: 70%;
+    height: 25px;
+}
+
+.btn-finalizar-cadastro{
+    background-color: #4caf4f;
+    color: #f4f4f4;
+    border-radius: 5px;
+    border: none;
+    width: 200px;
+    height: 40px;
+    font-size: larger;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+    margin-top: 15px;
+}
+
+.btn-finalizar-cadastro:hover{
+    background-color: #f4f4f4;
+    color: #4caf4f;
+    border-radius: 5px;
+    border: 1px solid #4caf4f;
+    box-shadow: 0 4px 12px #00000033;
+}

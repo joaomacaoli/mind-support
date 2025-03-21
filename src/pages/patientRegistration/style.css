@@ -1,0 +1,63 @@
+
+.container-form-patient{
+    background-color: #f4f4f4;
+    width: 70%;
+    height: 90%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    color: #434443;
+    row-gap: 25px;
+}
+
+.container-form-patient p{
+    font-size: x-large;
+    font-weight: bold;
+    margin: 0px;
+}
+
+
+.form-patient{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 85%;
+    row-gap: 10px;
+}
+
+.top-row-section{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4caf4f;
+}
+.top-left-column, .top-right-column,
+.bottom-left-column, .bottom-right-column{
+    flex: 1;
+    display: flex;
+    row-gap: 10px;
+    flex-direction: column;
+}
+
+.radio-group-anamnese{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.bottom-row-section{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.bottom-row-section .form-field textarea{
+    height: 40px;
+    width: 75%;
+    border-radius: 5px;
+    border-color: #4caf4f;
+}
