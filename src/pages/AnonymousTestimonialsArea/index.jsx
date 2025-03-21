@@ -1,58 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CircleUserRound, Trash, Edit } from "lucide-react";
+import { getAllTestimonials } from "../../services/testimonials";
 import "./styles.css";
 
 const Testimonials = () => {
   const [depoimento, setDepoimento] = useState("");
-  const [listaDepoimentos, setListaDepoimentos] = useState([
-    {
-      text: "Sinto que finalmente encontrei um lugar onde posso ser ouvido.",
-      isMocked: true,
-    },
-    {
-      text: "A plataforma me ajudou a encontrar o apoio que tanto precisava.",
-      isMocked: true,
-    },
-    {
-      text: "É muito bom saber que há profissionais dispostos a ajudar com preços acessíveis.",
-      isMocked: true,
-    },
-  ]);
+  // const [testimonials, setTestimonials] = useState([
+  //   {
+  //     text: "Sinto que finalmente encontrei um lugar onde posso ser ouvido.",
+  //     isMocked: true,
+  //   },
+  //   {
+  //     text: "A plataforma me ajudou a encontrar o apoio que tanto precisava.",
+  //     isMocked: true,
+  //   },
+  //   {
+  //     text: "É muito bom saber que há profissionais dispostos a ajudar com preços acessíveis.",
+  //     isMocked: true,
+  //   },
+  // ]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [newDepoimento, setNewDepoimento] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [testimonials, setTestimonials] = useState([]);
+
+  // Chamar API ao montar o componente
+  useEffect(() => {
+    async function fetchTestimonials() {
+      const data = await getAllTestimonials();
+      setTestimonials(data);
+    }
+    fetchTestimonials();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitted(true);
     if (depoimento.trim()) {
-      setListaDepoimentos([
-        { text: depoimento, isMocked: false },
-        ...listaDepoimentos,
-      ]);
+      setTestimonials([{ text: depoimento, isMocked: false }, ...testimonials]);
       setDepoimento("");
       setIsSubmitted(false);
     }
   };
 
   const handleDelete = (index) => {
-    if (!listaDepoimentos[index].isMocked) {
-      const updatedList = listaDepoimentos.filter((_, i) => i !== index);
-      setListaDepoimentos(updatedList);
+    if (!testimonials[index].isMocked) {
+      const updatedList = testimonials.filter((_, i) => i !== index);
+      setTestimonials(updatedList);
     }
   };
 
   const handleEdit = (index) => {
     setEditingIndex(index);
-    setNewDepoimento(listaDepoimentos[index].text);
+    setNewDepoimento(testimonials[index].text);
   };
 
   const handleSaveEdit = (index) => {
     if (newDepoimento.trim()) {
-      const updatedList = [...listaDepoimentos];
+      const updatedList = [...testimonials];
       updatedList[index].text = newDepoimento;
-      setListaDepoimentos(updatedList);
-      setEditingIndex(null); 
+      setTestimonials(updatedList);
+      setEditingIndex(null);
       setNewDepoimento("");
     }
   };
@@ -95,30 +103,27 @@ const Testimonials = () => {
           </div>
 
           <div className="testimonials-list">
-            {listaDepoimentos.length > 0 ? (
-                
+            {testimonials.length > 0 ? (
               <ul className="testimonials-ul">
-                {listaDepoimentos.map((item, index) => (
-                  <li key={index} className="testimonials-li">
+                {testimonials.map((testimonial) => (
+                  <li key={testimonial.id} className="testimonials-li">
                     <div className="testimonials-header">
                       <CircleUserRound size={24} />
                       <div className="testimonials-name">Usuário Anônimo</div>
-                      {!item.isMocked && (
-                        <>
-                          <Edit
-                            size={20}
-                            className="edit-icon"
-                            onClick={() => handleEdit(index)}
-                          />
-                          <Trash
-                            size={20}
-                            className="trash-icon"
-                            onClick={() => handleDelete(index)}
-                          />
-                        </>
-                      )}
+                      <>
+                        <Edit
+                          size={20}
+                          className="edit-icon"
+                          onClick={() => handleEdit(testimonial.id)}
+                        />
+                        <Trash
+                          size={20}
+                          className="trash-icon"
+                          onClick={() => handleDelete(testimonial.id)}
+                        />
+                      </>
                     </div>
-                    {editingIndex === index ? (
+                    {editingIndex === testimonial.id ? (
                       <div className="edit-input">
                         <input
                           type="text"
@@ -132,13 +137,13 @@ const Testimonials = () => {
                         <button
                           type="button"
                           className="save-btn"
-                          onClick={() => handleSaveEdit(index)}
+                          onClick={() => handleSaveEdit(testimonial.id)}
                         >
                           Salvar
                         </button>
                       </div>
                     ) : (
-                      <p>{item.text}</p>
+                      <p>{testimonial.description}</p>
                     )}
                   </li>
                 ))}
