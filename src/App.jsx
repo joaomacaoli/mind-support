@@ -13,6 +13,9 @@ import RegisterUsers from "./app/registers";
 import TestimonialsPage from "./app/testimonials";
 import SupportGroupsPage from "./app/support-groups";
 import Construction from "./app/building";
+import { AnamneseForm } from "./app/anamnese";
+import { PacientProfile } from "./app/pacient-profile";
+import PatientDashboard from "./app/pacient-dashboard";
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/registers" element={<RegisterUsers />} />
       <Route path="/construction" element={<Construction />} />
+      <Route path="/anamneses" element={<AnamneseForm />} />
+      <Route path="/pacient-profile" element={<PacientProfile />} />
+      <Route path="/pacient-dashboard" element={<PatientDashboard />} />
 
       <Route path="/generalRegistration" element={<GeneralRegistration />} />
       <Route path="/doctorRegistration" element={<DoctorRegistration />} />
