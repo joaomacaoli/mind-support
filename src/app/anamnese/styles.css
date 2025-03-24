@@ -1,0 +1,166 @@
+
+.anamnese-form-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px;
+    padding: 20px;
+
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .anamnese-step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .anamnese-step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+  }
+  
+  .anamnese-step.active .anamnese-step-number {
+    background-color: #287454;
+    color: white;
+  }
+  
+  .anamnese-step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    
+    color: #287454;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-weight: bold;
+  }
+  
+  .anamnese-step-title {
+    font-size: 14px;
+    color: #287454;
+  }
+
+  .anamnese-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .anamnese-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .anamnese-input-label {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 700;
+  }
+  
+  .anamnese-input-field {
+    padding: 6px;
+    border: 1px solid #287454;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #000000;
+    font-weight: 40;
+    background-color: white;
+  }
+  
+  .anamnese-input-field.error {
+    border-color: #ff4d4d;
+  }
+  
+  .anamnese-error-message {
+    color: #ff4d4d;
+    font-size: 12px;
+  }
+  
+  textarea.anamnese-input-field {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .anamnese-form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .anamnese-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .anamnese-button.primary {
+    background-color: #287454;
+    color: white;
+  }
+  
+  .anamnese-button.primary:hover {
+    background-color: #1f5c3f;
+  }
+  
+  .anamnese-button.secondary {
+    background-color: #f8f7f2;
+    color: #287454;
+    border: 1px solid #287454;
+  }
+  
+  .anamnese-button.secondary:hover {
+    background-color: #e0dfd9;
+  }
+  
+  .anamnese-button.submit {
+    background-color: #287454;
+    color: white;
+  }
+  
+  .anamnese-button.submit:hover {
+    background-color: #1f5c3f;
+  }
+
+  @media (max-width: 768px) {
+    .anamnese-step-indicator {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .anamnese-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .anamnese-step-number {
+      margin: 0;
+    }
+  
+    .anamnese-step-title {
+      font-size: 12px;
+    }
+  
+    .anamnese-form-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .anamnese-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
