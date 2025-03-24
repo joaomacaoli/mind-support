@@ -1,108 +1,101 @@
-import React from "react";
-
 import "./styles.css";
-import twoWomen from "/two-women-img.png";
-import greenBrain from "/green-brain.png";
-import grupoConversando from "/grupo.png";
+import Footer from "../../components/Footer";
 
-export default function HomePage() {
+import headflower from "./assets/headflower.jpg";
+import twoWomen from "./assets/two-women-img.png";
+
+const HomePage = () => {
   return (
-    <main className="main-layout">
-      <section className="presentation-section">
-        <div className="presentation-text">
-          <h1> MindSupport </h1>
-          <h3> Clínica de Apoio Psicológico </h3>
-          <h4>
-            Às vezes, tudo o que você precisa é de um
-            <span className="green-highlighted-font"> novo olhar</span> para
-            encontrar a <span className="green-highlighted-font"> força</span>
-            que já está dentro de você. Liberte-se do peso da
-            <span className="green-highlighted-font"> mente</span> e descubra
-            uma nova forma de
-            <span className="green-highlighted-font">viver.</span>
-          </h4>
-        </div>
-        <div className="presentation-logo">
-          <img src={grupoConversando} alt="Logo Psicologia" />
-        </div>
-      </section>
+    <>
+      <main className="main-landing-page">
+        <section className="presentation-section">
+          <div className="presentation-text">
+            <h1> MindSupport </h1>
+            <h3> Clínica de Apoio Psicológico </h3>
+            <h4>
+              {" "}
+              Liberte-se do peso da{" "}
+              <span className="green-highlighted-font">mente</span> e descubra
+              uma nova forma de{" "}
+              <span className="green-highlighted-font">viver</span>{" "}
+            </h4>
+          </div>
+          <div className="presentation-logo">
+            <img src={headflower} alt="Logo Psicologia" className="img-home" />
+          </div>
+        </section>
 
-      <section className="objetivos">
-        <h3> Confira nossos objetivos </h3>
-        <div className="card-container">
-          <div className="card obj1">
-            <img src={greenBrain} alt="Green Brain" />
-            <p className="titulo-obj"> Promoção de autoconhecimento </p>
-            <p>
-              Ajudar os pacientes a compreenderem melhor suas emoções, padrões
-              de pensamento e comportamentos.
-            </p>
+        <section className="objetivos">
+          <h3> Confira nossos objetivos </h3>
+          <div className="card-container">
+            <div className="card obj1">
+              <p className="titulo-obj"> Promoção de autoconhecimento </p>
+              <p>
+                {" "}
+                Ajudar os pacientes a compreenderem melhor suas emoções, padrões
+                de pensamento e comportamentos.
+              </p>
+            </div>
+
+            <div className="card obj2">
+              <p className="titulo-obj">Promovendo o Bem-Estar Coletivo </p>
+              <p>
+                {" "}
+                A psicologia comunitária busca promover o bem-estar coletivo, abordando questões sociais e emocionais em comunidades, com foco em prevenção e apoio mútuo.
+              </p>
+            </div>
+
+            <div className="card obj3">
+              <p className="titulo-obj"> Melhorar a qualidade de vida </p>
+              <p>
+                {" "}
+                Proporcionar práticas e estratégias personalizadas, para que
+                cada pessoa possa desenvolver habilidades para gerenciar o
+                estresse, melhorar o autocuidado e cultivar uma mentalidade
+                positiva.{" "}
+              </p>
+            </div>
+
+            <div className="card obj4">
+              <p className="titulo-obj"> Acompanhamento gratuito </p>
+              <p>
+                {" "}
+                Garantir acesso e apoio emocional de qualidade, com a ajuda de
+                psicólogos altamente qualificados, independentemente da sua
+                situação financeira.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="about-and-help-section">
+          <div className="left-about-and-help">
+            <img src={twoWomen} alt="Two Women Img" className="img-home"/>
           </div>
 
-          <div className="card obj2">
-            <img src={greenBrain} alt="Green Brain" />
-            <p className="titulo-obj"> Acompanhamento gratuito </p>
+          <div className="right-help-text">
             <p>
-              Garantir acesso e apoio emocional de qualidade, com a ajuda de
-              psicólogos altamente qualificados, independentemente da sua
-              situação financeira.
+              {" "}
+              Na nossa clínica, acreditamos que a saúde mental é a base para uma
+              vida equilibrada e plena. Sabemos que, muitas vezes, os desafios
+              emocionais podem se tornar um fardo pesado.{" "}
+            </p>
+            <p>
+              {" "}
+              No entanto, também sabemos que é possível superar esses obstáculos
+              e redescobrir a sua força interior. Estamos aqui para acompanhar
+              você em cada passo dessa jornada, oferecendo um ambiente
+              acolhedor, empático e profissional.
             </p>
           </div>
+        </section>
+      </main>
 
-          <div className="card obj3">
-            <img src={greenBrain} alt="Green Brain" />
-            <p className="titulo-obj"> Melhorar a qualidade de vida </p>
-            <p>
-              Proporcionar práticas e estratégias personalizadas, para que cada
-              pessoa possa desenvolver habilidades para gerenciar o estresse,
-              melhorar o autocuidado e cultivar uma mentalidade positiva.
-            </p>
-          </div>
-
-          <div className="card obj4">
-            <img src={greenBrain} alt="Green Brain" />
-            <p className="titulo-obj">Integração Social e Apoio Comunitário</p>
-            <p>
-              Fortalecer a rede de apoio social dos pacientes para que se sintam
-              conectados e apoiados na jornada de autoconhecimento e bem-estar.
-            </p>
-          </div>
-
-          <div className="card obj5">
-            <img src={greenBrain} alt="Green Brain" />
-            <p className="titulo-obj">Conexão de Profissionais e Pacientes</p>
-            <p>
-              Agendar sessões com psicólogos e terapeutas de diversas
-              localidades, garantindo acesso a uma variedade de especializações.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="about-and-help-section">
-        <div className="left-about-and-help">
-          <img src={twoWomen} alt="Two Women Img" />
-          <button className="btn ask-for-help-now"> Peça ajuda agora </button>
-        </div>
-
-        <div className="right-help-text">
-          <p>
-            Na nossa clínica, acreditamos que a saúde mental é a base para uma
-            vida equilibrada e plena. Sabemos que, muitas vezes, os desafios
-            emocionais podem se tornar um fardo pesado.
-          </p>
-          <p>
-            No entanto, também sabemos que é possível superar esses obstáculos e
-            redescobrir a sua força interior. Estamos aqui para acompanhar você
-            em cada passo dessa jornada, oferecendo um ambiente acolhedor,
-            empático e profissional.
-          </p>
-          <p>
-            Se você está pronto para dar o primeiro passo, estamos aqui para
-            ajudar!
-          </p>
-        </div>
-      </section>
-    </main>
+      <footer>
+        <Footer></Footer>
+      </footer>
+    </>
   );
-}
+};
+
+export default HomePage;
