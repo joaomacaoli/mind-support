@@ -14,7 +14,7 @@ O projeto foi desenvolvido por três integrantes:
   
 - **João Marcelo**
   
-- **Chrytina** - **(FrontEnd)** - Pages *[HomePage, Anamnsese básica, Cadastro de Paciente, Cadastro de Profissional]*
+- **Chrystina** - **(FrontEnd)** - Pages *[HomePage, Anamnsese básica, Cadastro de Paciente, Cadastro de Profissional]*
 
 ## 🛠️ Tecnologias Utilizadas
 
