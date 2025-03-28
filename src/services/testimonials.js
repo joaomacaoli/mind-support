@@ -4,9 +4,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 export async function getAllTestimonials() {
   try {
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/testimonials`
-    );
+    const response = await fetch(`${apiUrl}/testimonials`);
     if (!response.ok) {
       throw new Error("Erro ao buscar depoimentos");
     }
