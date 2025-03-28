@@ -21,12 +21,12 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/" className="footer-link">
+              <Link to="/testimonials" className="footer-link">
                 Depoimentos
               </Link>
             </li>
             <li>
-              <Link to="/" className="footer-link">
+              <Link to="/support-groups" className="footer-link">
                 Apoio
               </Link>
             </li>
@@ -59,8 +59,6 @@ export default function Footer() {
           reservados.
         </p>
       </div>
-
-    
     </footer>
   );
 }

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState } from "react"; 
 import "./styles.css";
 import PropTypes from "prop-types";
 import { ChevronLeft, ChevronRight, House } from "lucide-react";
-import { cpfMask, cnpjMask, isValidCPF, isValidCNPJ } from "../../utils/masks"; // Importando as funções do mask.js
+import { cpfMask, cnpjMask, isValidCPF, isValidCNPJ, isValidEmail } from "../../utils/masks";
 
 export function UserForm({ defaultValues, onSubmit }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -13,6 +13,8 @@ export function UserForm({ defaultValues, onSubmit }) {
     email: false,
     confirmPassword: false,
   });
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState("");
 
   const [formValues, setFormValues] = useState({
     fullName: "",
@@ -28,6 +30,7 @@ export function UserForm({ defaultValues, onSubmit }) {
       ageRange: "",
       otherAgeRange: "",
       freeSessions: "",
+      profilePhoto: null,
     },
     ...defaultValues,
   });
@@ -59,6 +62,27 @@ export function UserForm({ defaultValues, onSubmit }) {
     "Idosos (60+ anos)",
   ];
 
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfilePhoto(file);
+      
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+      
+      setFormValues(prev => ({
+        ...prev,
+        roleSpecific: {
+          ...prev.roleSpecific,
+          profilePhoto: file
+        }
+      }));
+    }
+  };
+
   const validateField = (name, value) => {
     let error = "";
     switch (name) {
@@ -71,8 +95,12 @@ export function UserForm({ defaultValues, onSubmit }) {
       case "cnpj":
         if (!isValidCNPJ(value.replace(/[^\d]/g, ""))) error = "CNPJ inválido";
         break;
+      case "profilePhoto":
+        if (userType === "professional" && !value)
+          error = "Foto de perfil é obrigatória para profissionais";
+        break;
       case "email":
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+        if (!isValidEmail(value))
           error = "E-mail inválido";
         break;
       case "password":
@@ -108,9 +136,17 @@ export function UserForm({ defaultValues, onSubmit }) {
 
     if (step === 0 && userType) {
       const fieldsToValidate =
-        userType === "patient" ? ["fullName", "cpf"] : ["fullName", "cnpj"];
+        userType === "patient" 
+          ? ["fullName", "cpf"] 
+          : ["fullName", "cnpj", "profilePhoto"];
+      
       fieldsToValidate.forEach((field) => {
-        const error = validateField(field, formValues[field]);
+        const error = validateField(
+          field, 
+          field === "profilePhoto" 
+            ? formValues.roleSpecific[field] 
+            : formValues[field]
+        );
         if (error) newErrors[field] = error;
       });
     }
@@ -193,15 +229,32 @@ export function UserForm({ defaultValues, onSubmit }) {
   const handleReset = () => {
     setCurrentStep(0);
     setUserType("");
+    setProfilePhoto(null);
+    setPhotoPreview("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateStep(currentStep)) {
-      onSubmit({
-        ...formValues,
-        userType,
+      const formData = new FormData();
+      
+      Object.keys(formValues).forEach(key => {
+        if (key === "roleSpecific") {
+          Object.keys(formValues.roleSpecific).forEach(subKey => {
+            if (subKey === "profilePhoto" && formValues.roleSpecific[subKey]) {
+              formData.append(subKey, formValues.roleSpecific[subKey]);
+            } else {
+              formData.append(subKey, formValues.roleSpecific[subKey]);
+            }
+          });
+        } else {
+          formData.append(key, formValues[key]);
+        }
       });
+      
+      formData.append("userType", userType);
+      
+      onSubmit(formData);
     }
   };
 
@@ -213,6 +266,43 @@ export function UserForm({ defaultValues, onSubmit }) {
       case "Informações Pessoais":
         return (
           <>
+            {userType === "professional" && (
+              <div className="input-group">
+                <label htmlFor="profilePhoto" className="input-label">
+                  Foto de Perfil <small>*</small>
+                </label>
+                <div className="photo-upload-container">
+                  <div className="photo-preview">
+                    {photoPreview ? (
+                      <img src={photoPreview} alt="Preview" className="photo-preview-image" />
+                    ) : (
+                      <div className="photo-placeholder">
+                        <span>Nenhuma foto selecionada</span>
+                      </div>
+                    )}
+                  </div>
+                  <input
+                    type="file"
+                    id="profilePhoto"
+                    name="profilePhoto"
+                    accept="image/*"
+                    onChange={handlePhotoChange}
+                    onBlur={(e) => {
+                      const error = validateField(e.target.name, profilePhoto);
+                      setErrors((prev) => ({ ...prev, profilePhoto: error }));
+                    }}
+                    className={`file-input ${errors.profilePhoto ? "error" : ""}`}
+                  />
+                  <label htmlFor="profilePhoto" className="upload-button">
+                    Selecionar Foto
+                  </label>
+                  {errors.profilePhoto && (
+                    <small className="error-message">{errors.profilePhoto}</small>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="input-group">
               <label htmlFor="fullName" className="input-label">
                 Nome completo <small>*</small>
@@ -287,7 +377,7 @@ export function UserForm({ defaultValues, onSubmit }) {
                 className="button secondary"
                 aria-label="Voltar ao início"
               >
-                <House/>
+                <House />
               </button>
 
               <button
