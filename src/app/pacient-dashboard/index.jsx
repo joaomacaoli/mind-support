@@ -18,7 +18,7 @@ const PatientDashboard = () => {
   const [patientData] = useState({
     nome: "João da Silva",
     email: "joao.silva@exemplo.com",
-    foto: "http://graph.facebook.com/{user-id}/picture?type=large",
+    foto: "https://randomuser.me/api/portraits/men/2.jpg",
   });
 
   const [upcomingSessions] = useState([
@@ -88,30 +88,30 @@ const PatientDashboard = () => {
     switch (activeTab) {
       case "agenda":
         return (
-          <div className="tab-content">
+          <div className="tab-content-pacient">
             <h2>Próximas Consultas</h2>
-            <div className="sessions-grid">
+            <div className="sessions-grid-pacient">
               {upcomingSessions.map((session) => (
-                <div key={session.id} className="session-card">
-                  <div className="session-info">
+                <div key={session.id} className="session-card-pacient">
+                  <div className="session-info-pacient">
                     <h3>{session.profissional}</h3>
-                    <p className="specialty">{session.especialidade}</p>
-                    <p className="date-time">
+                    <p className="specialty-pacient">{session.especialidade}</p>
+                    <p className="date-time-pacient">
                       <Calendar size={14} /> {session.data} <Clock size={14} />{" "}
                       {session.horario}
                     </p>
-                    <p className={`status ${session.status.toLowerCase()}`}>
+                    <p className={`status-pacient ${session.status.toLowerCase()}`}>
                       {session.status}
                     </p>
-                    <p className="modality">{session.modalidade}</p>
+                    <p className="modality-pacient">{session.modalidade}</p>
                     {session.modalidade === "Online" && (
-                      <p className="link">Link: {session.link}</p>
+                      <p className="link-pacient">Link: {session.link}</p>
                     )}
                     {session.modalidade === "Presencial" && (
-                      <p className="address">{session.endereco}</p>
+                      <p className="address-pacient">{session.endereco}</p>
                     )}
                   </div>
-                  <div className="session-actions">
+                  <div className="session-actions-pacient">
                     {new Date(session.data.split("/").reverse().join("-")) >
                     new Date() ? (
                       <>
@@ -129,8 +129,8 @@ const PatientDashboard = () => {
                       <button
                         className="primary-button"
                         onClick={() =>
-                        //   navigate(`/zzzzzzzz/${session.id}`)
-                        navigate(`/construction`)
+                          //   navigate(`/zzzzzzzz/${session.id}`)
+                          navigate(`/construction`)
                         }
                       >
                         Avaliar Consulta
@@ -142,12 +142,12 @@ const PatientDashboard = () => {
             </div>
 
             <h2>Histórico de Consultas</h2>
-            <div className="history-grid">
+            <div className="history-grid-pacient">
               {sessionHistory.map((session) => (
-                <div key={session.id} className="history-card">
+                <div key={session.id} className="history-card-pacient">
                   <h3>{session.profissional}</h3>
-                  <p className="date">{session.data}</p>
-                  <div className="rating">
+                  <p className="date-pacient">{session.data}</p>
+                  <div className="rating-pacient">
                     {[...Array(5)].map((_, i) => (
                       <span
                         key={i}
@@ -174,14 +174,15 @@ const PatientDashboard = () => {
 
       case "profissionais":
         return (
-          <div className="tab-content">
-            <div className="search-bar">
+          <div className="tab-content-pacient">
+            <div className="search-bar-pacient">
               <input type="text" placeholder="Buscar profissionais..." />
               <select>
                 <option value="">Todas especialidades</option>
                 <option value="ansiedade">Ansiedade</option>
                 <option value="depressao">Depressão</option>
-                <option value="tcc">TCC</option>
+                <option value="fobia">Fobias</option>
+                <option value="outros">Outros</option>
               </select>
               <select>
                 <option value="">Todas regiões</option>
@@ -194,8 +195,8 @@ const PatientDashboard = () => {
               <button className="primary-button">Buscar</button>
             </div>
 
-            <div className="professionals-grid">
-              <div className="empty-state">
+            <div className="professionals-grid-filtered">
+              <div className="empty-state-filtered">
                 <p>
                   Use os filtros acima para encontrar profissionais disponíveis
                 </p>
@@ -212,18 +213,18 @@ const PatientDashboard = () => {
 
       case "grupos":
         return (
-          <div className="tab-content">
+          <div className="tab-content-pacient">
             <h2>Grupos de Apoio Recomendados</h2>
-            <div className="groups-grid">
+            <div className="groups-grid-pacient">
               {supportGroups.map((group) => (
-                <div key={group.id} className="group-card">
+                <div key={group.id} className="group-card-pacient">
                   <h3>{group.nome}</h3>
                   <p className="description">{group.descricao}</p>
                   <p className="next-meeting">
                     <Clock size={14} /> Próximo encontro:{" "}
                     {group.proximoEncontro}
                   </p>
-                  <div className="group-actions">
+                  <div className="group-actions-pacient">
                     <button className="primary-button">Participar</button>
                     <button
                       className="text-button"
@@ -245,31 +246,37 @@ const PatientDashboard = () => {
 
   return (
     <div className="patient-dashboard">
-      <header className="dashboard-header">
-        <div className="user-info">
+      <header className="dashboard-header-pacient">
+        <div className="user-info-pacient">
           <img
             src={patientData.foto}
             alt="Foto do paciente"
             className="user-avatar"
+            onClick={() => navigate('/pacient-profile')}
           />
           <div>
             <h1>Olá, {patientData.nome.split(" ")[0]}!</h1>
             <p className="user-email">{patientData.email}</p>
           </div>
         </div>
-        <div className="dash-buttons-secundary">
+        <div className="dash-buttons-secundary-pacient">
           <button
-            className="profile-button"
+            className="profile-button-pacient"
             onClick={() => navigate("/pacient-profile")}
           >
             <User size={18} /> Meu Perfil
           </button>
 
-          <button className="secondary-button">Sair</button>
+          <button
+            className="secondary-button"
+            onClick={() => navigate("/")}
+          >
+            Sair
+          </button>
         </div>
       </header>
 
-      <nav className="dashboard-nav">
+      <nav className="dashboard-nav-pacient">
         <ul>
           <li className={activeTab === "agenda" ? "active" : ""}>
             <button onClick={() => setActiveTab("agenda")}>
@@ -288,7 +295,7 @@ const PatientDashboard = () => {
           </li>
           <li>
             <button onClick={() => navigate("/construction")}>
-                <MessageSquare size={18} /> Depoimentos
+              <MessageSquare size={18} /> Depoimentos
             </button>
           </li>
           <li>
@@ -299,7 +306,7 @@ const PatientDashboard = () => {
         </ul>
       </nav>
 
-      <main className="dashboard-main">{renderTabContent()}</main>
+      <main className="dashboard-main-pacient">{renderTabContent()}</main>
 
       <div className="emergency-banner">
         <p>

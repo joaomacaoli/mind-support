@@ -16,6 +16,8 @@ import Construction from "./app/building";
 import { AnamneseForm } from "./app/anamnese";
 import { PacientProfile } from "./app/pacient-profile";
 import PatientDashboard from "./app/pacient-dashboard";
+import ProfessionalProfile from "./app/professional-profile";
+import ProfessionalDashboard from "./app/professional-dashboard";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
       <Route path="/anamneses" element={<AnamneseForm />} />
       <Route path="/pacient-profile" element={<PacientProfile />} />
       <Route path="/pacient-dashboard" element={<PatientDashboard />} />
+      <Route path="/professional-dashboard" element={<ProfessionalDashboard />} />
+      <Route path="/professional-profile" element={<ProfessionalProfile />} />
 
       <Route path="/generalRegistration" element={<GeneralRegistration />} />
       <Route path="/doctorRegistration" element={<DoctorRegistration />} />

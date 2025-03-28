@@ -1,7 +1,6 @@
-
 import UnderConstruction from "../components/UnderConstruction";
 
-function Construction (){
+function Construction() {
   return (
     <div>
       <UnderConstruction />
