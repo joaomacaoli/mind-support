@@ -243,8 +243,6 @@ export function UserForm({ defaultValues, onSubmit }) {
           Object.keys(formValues.roleSpecific).forEach(subKey => {
             if (subKey === "profilePhoto" && formValues.roleSpecific[subKey]) {
               formData.append(subKey, formValues.roleSpecific[subKey]);
-            } else {
-              formData.append(subKey, formValues.roleSpecific[subKey]);
             }
           });
         } else {
