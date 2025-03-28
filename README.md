@@ -1,63 +1,166 @@
-# 🎭 Projeto de Psicologia Comunitária - Avanti
+# MindSupport - Frontend
 
-## 📌 Sobre o Projeto
+## Tabela de Conteúdos
 
-Este projeto foi desenvolvido no curso **Avanti** como parte de um estudo sobre **Psicologia Comunitária**. O objetivo é fornecer uma plataforma interativa para disseminar informações, promover engajamento e apoiar iniciativas voltadas ao bem-estar e à saúde mental da comunidade.
+- [MindSupport - Frontend](#mindsupport---frontend)
+  - [Tabela de Conteúdos](#tabela-de-conteúdos)
+  - [🎭 Sobre o Projeto](#-sobre-o-projeto)
+  - [👥 Equipe](#-equipe)
+  - [🛠 Tecnologias Utilizadas](#-tecnologias-utilizadas)
+    - [Principais](#principais)
+    - [Bibliotecas Complementares](#bibliotecas-complementares)
+  - [🚀 Funcionalidades](#-funcionalidades)
+    - [Para Pacientes](#para-pacientes)
+    - [Para Profissionais](#para-profissionais)
+    - [Gerais](#gerais)
+  - [📂 Estrutura do Projeto](#-estrutura-do-projeto)
+  - [💻 Instalação e Execução](#-instalação-e-execução)
+    - [Pré-requisitos](#pré-requisitos)
+    - [Passo a passo](#passo-a-passo)
+  - [🤝 Contribuição](#-contribuição)
+  - [📜 Licença](#-licença)
 
-Além de apresentar conteúdos educativos, o projeto incentiva a **contribuição ativa** de usuários e desenvolvedores interessados no tema. Todos podem colaborar trazendo novas ideias, aprimorando funcionalidades ou relatando problemas para tornar a plataforma mais acessível e eficiente.
+## 🎭 Sobre o Projeto
 
-## 👨‍💻 Integrantes
+O MindSupport é uma plataforma desenvolvida para conectar pacientes e profissionais de psicologia, oferecendo recursos completos para acompanhamento terapêutico e promoção da saúde mental.
 
-O projeto foi desenvolvido por três integrantes:
+Principais objetivos:
 
-- **Marcos Vinícius** - **(FrontEnd)** - Pages *[HomePage, Anamnsese, Login, Pacient-Dashboard, Pacient-Profile, Professional-Dashboard, Professional-Profile, Regiters, Testimonial e Building]* - Components *[UserForms, Footer, UnderConstruction]* - Utils *[Masks]*
-  
-- **João Marcelo**
-  
-- **Chrystina** - **(FrontEnd)** - Pages *[HomePage, Anamnsese básica, Cadastro de Paciente, Cadastro de Profissional]*
+- Facilitar o acesso a serviços psicológicos
+- Prover ferramentas para acompanhamento terapêutico
+- Promover educação em saúde mental
+- Criar uma comunidade de apoio
 
-## 🛠️ Tecnologias Utilizadas
+## 👥 Equipe
 
-A plataforma foi construída utilizando as seguintes tecnologias:
+| Integrante      | Área     | Responsabilidades                                                                                                                                                                                                           |
+| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Chrystina       | FrontEnd | Páginas: HomePage, Anamnese básica, Cadastro de Paciente, Cadastro de Profissional                                                                                                                                          |
+| João Marcelo    | BackEnd  | API, Integração com Banco de Dados                                                                                                                                                                                          |
+| Marcos Vinícius | FrontEnd | Páginas: HomePage, Anamnese, Login, Pacient-Dashboard, Pacient-Profile, Professional-Dashboard, Professional-Profile, Registers, Testimonial, Building<br>Componentes: UserForms, Footer, UnderConstruction<br>Utils: Masks |
 
-- ⚛ **React.js** - Biblioteca principal para a interface do usuário.
-- 🟨 **JavaScript (JS)** - Linguagem principal do desenvolvimento.
-- 🎨 **CSS** - Estilização dos componentes.
+## 🛠 Tecnologias Utilizadas
+
+### Principais
+
+- ⚛ React.js (v18+)
+- 🟨 JavaScript (ES6+)
+- 🎨 CSS3
+- 📦 npm
+
+### Bibliotecas Complementares
+
+- react-router-dom (roteamento)
+- axios (requisições HTTP)
+- react-hook-form (formulários)
+- [adicione outras bibliotecas relevantes]
 
 ## 🚀 Funcionalidades
 
-O projeto conta com diversas funcionalidades, incluindo:
+### Para Pacientes
 
-- ✅ Apresentação de conteúdos sobre Psicologia Comunitária.
-- ✅ Espaço para interação e compartilhamento de experiências.
-- ✅ Recursos informativos sobre saúde mental e bem-estar.
+- ✅ Cadastro e perfil personalizado
+- ✅ Agendamento de sessões
+- ✅ Acompanhamento de anamneses
+- ✅ Depoimentos e feedbacks
+
+### Para Profissionais
+
+- ✅ Cadastro com validação
+- ✅ Dashboard de pacientes
+- ✅ Gestão de sessões
+- ✅ Ferramentas de avaliação
+
+### Gerais
+
+- ✅ Sistema de autenticação seguro
+- ✅ Interface responsiva
+- ✅ Conteúdos educativos
+
+## 📂 Estrutura do Projeto
+
+```
+mind-support/
+├── public/
+├── src/
+│   ├── assets/          # Imagens, ícones, fonts
+│   ├── components/      # Componentes reutilizáveis
+│   ├── pages/           # Páginas da aplicação
+│   ├── routes/          # Configuração de rotas
+│   ├── services/        # Integração com API
+│   ├── styles/          # Estilos globais
+│   ├── utils/           # Funções utilitárias
+│   ├── App.js           # Componente principal
+│   └── index.js         # Ponto de entrada
+├── .gitignore
+├── package.json
+└── README.md
+```
+
+## 💻 Instalação e Execução
+
+### Pré-requisitos
+
+- Node.js (v18+)
+- npm (v9+)
+- Conexão com backend (configurar no .env)
+
+### Passo a passo
+
+1. Clone o repositório:
+
+```sh
+git clone https://github.com/joaomacaoli/mind-support.git
+```
+
+2. Acesse o diretório:
+
+```sh
+cd mind-support
+```
+
+3. Instale as dependências:
+
+```sh
+npm install
+```
+
+4. Configure as variáveis de ambiente:
+
+```sh
+cp .env.example .env
+# Edite o .env com suas configurações
+```
+
+5. Inicie o servidor de desenvolvimento:
+
+```sh
+npm start
+```
+
+6. Acesse no navegador:
+
+```
+http://localhost:3000
+```
 
 ## 🤝 Contribuição
 
-Acreditamos que o **trabalho colaborativo** pode fortalecer ainda mais esse projeto. Por isso, qualquer pessoa interessada pode contribuir para o seu aprimoramento. Você pode ajudar de diversas formas:
+Siga estas etapas para contribuir:
 
-- 🔹 Sugerindo novas funcionalidades.
-- 🔹 Reportando problemas e bugs.
-- 🔹 Melhorando a interface e a experiência do usuário.
-- 🔹 Adicionando novos conteúdos informativos.
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abra um Pull Request
 
-Para contribuir, siga os passos abaixo:
+Padrões de código:
 
-```sh
-# Clone o repositório
-git clone (https://github.com/joaomacaoli/mind-support.git)
+- Siga o ESLint configurado
+- Commits semânticos
+- Componentes funcionais com React Hooks
+- Estilos com CSS modules
 
-# Acesse o diretório do projeto
-cd mind-supoort
+## 📜 Licença
 
-# Crie uma nova branch para a sua modificação
-git checkout -b minha-feature
-
-# Faça as alterações e adicione ao commit
-git add .
-
-# Faça um commit descritivo
-git commit -m "Descrição das alterações"
-
-# Envie as mudanças para o repositório remoto
-git push origin minha-feature
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
