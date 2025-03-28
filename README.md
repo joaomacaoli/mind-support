@@ -45,7 +45,7 @@ Para contribuir, siga os passos abaixo:
 
 ```sh
 # Clone o repositório
-git clone [(https://github.com/joaomacaoli/mind-support.git)
+git clone (https://github.com/joaomacaoli/mind-support.git)
 
 # Acesse o diretório do projeto
 cd mind-supoort
