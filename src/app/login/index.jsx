@@ -31,22 +31,28 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (validateInputs() && email == "pacient.test@gmail.com" && password == "123456" ) {
+    if (
+      validateInputs() &&
+      email == "pacient.test@gmail.com" &&
+      password == "123456"
+    ) {
       console.log("Login bem-sucedido!");
       navigate("/pacient-dashboard");
-    } else if(validateInputs() && email == "professional.test@gmail.com" && password == "123456"){
+    } else if (
+      validateInputs() &&
+      email == "professional.test@gmail.com" &&
+      password == "123456"
+    ) {
       console.log("Login bem-sucedido!");
       navigate("/professional-dashboard");
     }
   };
 
-
-
   return (
     <div className="login-main">
       <div className="login-container">
         <h1 className="title-login">Mind Support</h1>
-        <form className="form-login" onClick={handleLogin} noValidate >
+        <form className="form-login" onClick={handleLogin} noValidate>
           <div className="input-email">
             <label htmlFor="email" className="label-login">
               E-mail <small>*</small>
@@ -93,7 +99,6 @@ const Login = () => {
               className="button-entre-login"
               disabled={loading}
               onClick={handleLogin}
-
             >
               {loading ? "Entrando..." : "Entrar"}
             </button>

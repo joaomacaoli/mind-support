@@ -28,6 +28,7 @@ export function PacientProfile() {
 
   const handleSave = () => {
     setUserData({
+      type: tempData.type,
       nome: tempData.nome,
       email: tempData.email,
       cpf: tempData.cpf,
