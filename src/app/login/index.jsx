@@ -30,17 +30,23 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (validateInputs()) {
+
+    if (validateInputs() && email == "pacient.test@gmail.com" && password == "123456" ) {
       console.log("Login bem-sucedido!");
-      navigate("/");
+      navigate("/pacient-dashboard");
+    } else if(validateInputs() && email == "professional.test@gmail.com" && password == "123456"){
+      console.log("Login bem-sucedido!");
+      navigate("/professional-dashboard");
     }
   };
+
+
 
   return (
     <div className="login-main">
       <div className="login-container">
         <h1 className="title-login">Mind Support</h1>
-        <form className="form-login" onSubmit={handleLogin} noValidate>
+        <form className="form-login" onClick={handleLogin} noValidate >
           <div className="input-email">
             <label htmlFor="email" className="label-login">
               E-mail <small>*</small>
@@ -86,6 +92,8 @@ const Login = () => {
               type="submit"
               className="button-entre-login"
               disabled={loading}
+              onClick={handleLogin}
+
             >
               {loading ? "Entrando..." : "Entrar"}
             </button>
